@@ -72,7 +72,7 @@ I also chose to combine the Monthly Gross Income and Monthly Housing Payment int
 <img width="377" alt="image" src="https://github.com/user-attachments/assets/e23b4103-63a2-4bae-a1eb-1617c46ec99c" />
 
 ### How Lenders differ from each other
-For this portion, I checked to see how the approval rates differed by Lender, and to no surprise the approval rate seemed to be related to how much revenue per approval each lender offered BankRate (the higher the revenue, the lower the approval rate).
+For this portion, I checked to see how the approval rates differed by Lender, and to no surprise the approval rate seemed to be related to how much revenue per approval each lender offered the company (the higher the revenue, the lower the approval rate).
 <img width="1677" alt="image" src="https://github.com/user-attachments/assets/309ef4ba-8d0c-4e4b-972b-82f37e8c861e" />
 <img width="623" alt="image" src="https://github.com/user-attachments/assets/8fc50f93-9d1a-462b-8fe0-5522c2fc15a1" />
 To explore how each lender is different, I aggregated the data by lending parter and displayed the mean and standard deviations for the numerical columns. I chose to only consider borrowers that were approved loans, since that would be more representative of the requirements of each loaner.
@@ -88,9 +88,9 @@ First, the system begins by aggregating the dataset by loaner and training a log
 
 There should now be one model per loaner, based on historical data of customers that applied to the corresponding loaner. Then, for each new customer, run each model and return the predicted probability (the calculated probability that a customer will be approved by the corresponding loaner). After this is done, multiply each probability with the revenue per approval amount that was set by the probability's corresponder loaner.
 
-The resulting values are the "Expected Revenues," which is the amount that Bankrate could expect to receive from matching a customer to a specific loaner. Now, the system compares these expected revenues and matches the new customer with the loaner with which the expected revenue is the highest.
+The resulting values are the "Expected Revenues," which is the amount that the company could expect to receive from matching a customer to a specific loaner. Now, the system compares these expected revenues and matches the new customer with the loaner with which the expected revenue is the highest.
 
-This system works due to the law of large numbers, where when applied on a large scale of customers and with well trained models, the optimal revenue is sure to be obtained, maximizing Bankrate's revenue and their customers' approval rates.
+This system works due to the law of large numbers, where when applied on a large scale of customers and with well trained models, the optimal revenue is sure to be obtained, maximizing the company's revenue and their customers' approval rates.
 
 ### Testing the system
 The below code will train models on randomly chosen training data, aggregated by loaner. Then the code is run on testing data, which is an accumulation of the testing data sets from each loaner group. This ensures that no training data is leaked into the testing data, causing an overfit model. The expected revenues that were chosen are then summed up and compared with the total revenue of the current system (original data). Similarly, the probabilities that were chosen are averaged out and compared against the approval rate of the original data.
@@ -108,9 +108,9 @@ The other variables are not nearly as strong as the previously mentioned two, bu
 An interesting couple things to note are how for Employment Status, loaner A seems to experience the opposite effect as the other two loaners. For example, while probability for getting approved from loaner B or C are lessened when you are unemployed, it is actually slightly improved for loaner A. Meanwhile, this effect is observed in the opposite effect for part timers, where part time customers are penalized when applying for a loan for lender A. One interpretation is that loaner A is targeted for unemployed customers. But this is contradicted by the fact that Net income and FICO score are positively influential for getting approved for loan A. So, it's possible that loaner A's approval process is more complex than what a logistic regression could capture.
 
 ### Conclusion and potential next steps
-As demonstrated by the potential increase in revenue and approval rate, this proposed matching system can dramatically improve Bankrate's ability to correctly match their customers with the appropriate loaner, as well as to maximize revenue based on historical data that is easily capturable.
+As demonstrated by the potential increase in revenue and approval rate, this proposed matching system can dramatically improve the company's ability to correctly match their customers with the appropriate loaner, as well as to maximize revenue based on historical data that is easily capturable.
 
 This system could also possibly be further optimized with a few tweaks: 1. Experimentation with more complex machine learning models. As mentioned before, it's possible that loaner A's approval process is more complicated than what a logistic regression can capture. In this case, a more complex model may be better suited, but with the cost of more computational power, which can decrease overall revenue for the company. 2. If data exists on job stability between job industries, this data could be merged with the current dataset and used as a significant predictor of approvability. This is due to the fact that loans are paid in the long term, so stability of income is important in determining whether or not a customer can pay off their loan. 3. A hard filter could be introduced before running the models to avoid expensive computations, especially when experimenting with more complex machine learning models. For example, if a customer was ever bankrupt or foreclosed their home, they wouldn't be considered for loaner B.
 
-With these steps, the proposed system could become even better than now, driving more revenue increase and approval rate improvement, making Bankrate all the more profitable and reliable.
+With these steps, the proposed system could become even better than now, driving more revenue increase and approval rate improvement, making the company all the more profitable and reliable.
 
